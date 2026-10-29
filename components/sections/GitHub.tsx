@@ -16,7 +16,7 @@ export default function GitHub() {
 
   return (
     <section id="github" className="mx-auto max-w-content px-6 py-24">
-      <SectionHeading id="github" kicker="Open Source" title="Code I've written." />
+      <SectionHeading id="github" kicker="Source code" title="Built in the open, when I can." />
 
       {configured && (
         <div className="mt-8 flex items-center gap-2">
@@ -32,7 +32,7 @@ export default function GitHub() {
         </div>
       )}
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <div className="mt-8 grid gap-4">
         {hasRepos ? (
           githubSection.repos.map((repo, i) => {
             const linked = isProfileUrl(repo.url);

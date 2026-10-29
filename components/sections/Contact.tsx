@@ -13,15 +13,17 @@ import { isConfiguredEmail } from "@/lib/links";
  */
 export default function Contact() {
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
   const emailConfigured = isConfiguredEmail(site.links.email);
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(site.links.email);
+      setCopyError(false);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard unavailable */
+      setCopyError(true);
     }
   };
 
@@ -34,9 +36,9 @@ export default function Contact() {
           Let&apos;s build something<span className="text-accent">.</span>
         </h2>
         <p className="mt-5 max-w-xl text-lg text-muted">
-          Have a project, opportunity, or interesting problem? I&apos;m glad to
-          talk about real systems, real constraints, and building things that
-          work.
+          Looking for a developer who enjoys working across the stack?
+          I’m open to developer roles and conversations about thoughtful
+          web and mobile products.
         </p>
 
         <div className="mt-10 space-y-6">
@@ -65,6 +67,8 @@ export default function Contact() {
             </p>
           )}
 
+          {copyError && <p role="status" className="text-sm text-muted">Couldn’t copy automatically. Select the email address or use Get In Touch to open your email app.</p>}
+          <p className="text-xs text-muted">Chennai, India · Open to remote opportunities</p>
           <SocialLinks />
         </div>
       </div>

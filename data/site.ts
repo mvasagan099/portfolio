@@ -1,118 +1,48 @@
-/**
- * Central site configuration.
- *
- * EDIT THIS FILE to update personal details. Values marked "REQUIRED" must be
- * filled with real data before going live. Nothing here is auto-claimed as fact;
- * fields we cannot verify are left empty / set to safe placeholders so they can
- * be filled in manually without touching any component code.
- */
-
+/** Portfolio content. Update professional details here. */
 export const site = {
-  name: "Manivasagan A.",
-  shortName: "Mani",
-  title: "Software Developer",
-  tagline: "I build scalable software systems.",
-  // Availability indicator. Set to null to hide entirely.
-  availabilityStatus: null as string | null,
-
+  name: "Manivasagan A.", shortName: "Mani", title: "Full Stack Developer",
+  tagline: "Full Stack Developer in Chennai building web applications, real-time experiences, and reliable backend systems with React, Node.js, PostgreSQL, Redis, and Docker.",
+  location: "Chennai, India",
+  availabilityStatus: "Open to developer opportunities",
   links: {
-    // REQUIRED: fill with real profile URLs.
-    github: {
-      username: "mvasagan099",
-      url: "https://github.com/mvasagan099",
-    },
-    linkedin: {
-      url: "#", // REQUIRED
-    },
-    email: "hello@example.com", // REQUIRED
+    github: { username: "mvasagan099", url: "https://github.com/mvasagan099" },
+    linkedin: { url: "https://www.linkedin.com/in/manivasagan-a-90b304339" },
+    email: "mvasagan099@gmail.com",
   },
 };
-
 export const hero = {
-  // Values shown in the developer terminal component.
-  whoami: "Manivasagan A.",
-  focus: ["Full-stack development", "Real-time systems", "Backend architecture", "Machine learning"],
-  stack: ["Next.js", "Node.js", "PostgreSQL", "Redis", "Docker", "Python", "XGBoost"],
-  status: "Building and learning.",
+  whoami: site.name,
+  focus: ["Thoughtful interfaces", "Reliable APIs", "Real-time experiences"],
+  stack: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+  status: "Learning. Building. Shipping.",
 };
-
-export const technicalHighlights = [
-  "Real-time systems",
-  "Backend architecture",
-  "Full-stack applications",
-  "Machine learning",
-];
-
+export const technicalHighlights = ["Web & mobile", "Real-time systems", "API development", "Cloud deployment"];
 export const timeline = [
-  { label: "Computer Science & Engineering", description: "Foundation in computing fundamentals" },
-  { label: "Web Development", description: "Building for the browser" },
-  { label: "Full-Stack Development", description: "End-to-end product engineering" },
-  { label: "Backend & Real-Time Systems", description: "Architecture, concurrency, data" },
-  { label: "Machine Learning", description: "Applied models and pipelines" },
+  { label: "Computer Science & Engineering", description: "B.E. CSE · Saraswathy College of Engineering and Technology · Anna University affiliated" },
+  { label: "Building across web & mobile", description: "React applications, Flutter, and Android packaging with Capacitor." },
+  { label: "Full Stack Developer", description: "Lords and Kings Enterprises Private Limited · Chennai · July 2026–present" },
+  { label: "Exploring applied machine learning", description: "Time-series research, model evaluation, and Python APIs." },
 ];
-
-export const engineeringPrinciples: {
-  number: string;
-  title: string;
-  description: string;
-}[] = [
-  { number: "01", title: "Understand the problem", description: "Clarify requirements and constraints before writing code." },
-  { number: "02", title: "Design the architecture", description: "Choose the right structure for scale, clarity, and change." },
-  { number: "03", title: "Build the system", description: "Implement with clean, maintainable, testable code." },
-  { number: "04", title: "Test and debug", description: "Verify behavior, handle failure modes, and iterate." },
-  { number: "05", title: "Deploy and improve", description: "Ship, observe, measure, and refine continuously." },
+export const engineeringPrinciples = [
+  { number: "01", title: "Understand", description: "Start with the user, the problem, and the constraints." },
+  { number: "02", title: "Build", description: "Connect a clear interface to a well-structured backend." },
+  { number: "03", title: "Verify", description: "Test failure paths, reconnects, and real device behavior." },
+  { number: "04", title: "Improve", description: "Ship, observe what happens, and keep making it better." },
 ];
-
-export const experience: {
-  role: string;
-  company: string;
-  date: string;
-  description: string;
-  technologies: string[];
-  contributions: string[];
-}[] = [
-  {
-    role: "Software Developer",
-    company: "Full-stack & ML projects",
-    date: "", // REQUIRED
-    description: "Hands-on projects across full-stack web development, real-time systems, and machine learning.",
-    technologies: ["Next.js", "Node.js", "PostgreSQL", "Redis", "Docker", "Python", "XGBoost"],
-    contributions: [
-      "Designed and built full-stack applications end to end.",
-      "Implemented real-time communication and backend services.",
-      "Trained and evaluated machine-learning models on structured data.",
-    ],
-  },
-];
-
-export const certifications = [] as {
-  title: string;
-  issuer: string;
-  date?: string;
-  url?: string;
-}[];
-
-export const achievements = [] as {
-  title: string;
-  description: string;
-  date?: string;
-}[];
-
-export const githubSection = {
-  username: "mvasagan099",
-  url: "https://github.com/mvasagan099",
-  repos: [
-    {
-      name: "Gaming Hub",
-      description: "Real-time multiplayer gaming platform architecture.",
-      language: "TypeScript",
-      url: "#", // REQUIRED
-    },
-    {
-      name: "Trade Prediction",
-      description: "Machine learning pipeline for structured financial data.",
-      language: "Python",
-      url: "#", // REQUIRED
-    },
+export const experience = [{
+  role: "Full Stack Developer", company: "Lords and Kings Enterprises Private Limited",
+  date: "July 2026 — Present",
+  description: "Building and maintaining web applications and backend services in Chennai, working across the interface, API, database, and deployment layers.",
+  technologies: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+  contributions: [
+    "Develop attendance and administration workflows with location and photo capture.",
+    "Build real-time application features, API integrations, and database-backed interfaces.",
+    "Debug production issues, improve responsive layouts, and package applications for mobile devices.",
   ],
+}];
+export const certifications: { title: string; issuer: string; date?: string; url?: string }[] = [];
+export const achievements: { title: string; description: string; date?: string }[] = [];
+export const githubSection = {
+  username: site.links.github.username, url: site.links.github.url,
+  repos: [{ name: "portfolio", description: "The source behind this site. Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.", language: "TypeScript", url: "https://github.com/mvasagan099/portfolio" }],
 };

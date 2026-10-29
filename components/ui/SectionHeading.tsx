@@ -3,12 +3,11 @@
 import Reveal from "@/components/ui/Reveal";
 
 export const sectionOrder = [
-  { id: "about", label: "ABOUT" },
+  { id: "projects", label: "SELECTED WORK" },
   { id: "skills", label: "SKILLS" },
   { id: "experience", label: "EXPERIENCE" },
-  { id: "projects", label: "PROJECTS" },
-  { id: "achievements", label: "ACHIEVEMENTS" },
-  { id: "github", label: "OPEN SOURCE" },
+  { id: "about", label: "ABOUT" },
+  { id: "github", label: "SOURCE CODE" },
   { id: "contact", label: "CONTACT" },
 ] as const;
 

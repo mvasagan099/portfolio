@@ -1,124 +1,21 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-import { Button, Terminal } from "@/components";
-import { hero, site, technicalHighlights } from "@/data/site";
-import { isProfileUrl } from "@/lib/links";
+import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
+import Button from "@/components/ui/Button";
+import Terminal from "@/components/ui/Terminal";
+import { site } from "@/data/site";
 
 export default function Hero() {
-  const reduce = useReducedMotion();
-  const hasGithub = isProfileUrl(site.links.github.url);
-  const hasLinkedin = isProfileUrl(site.links.linkedin.url);
-
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  };
-  const item = {
-    hidden: { opacity: 0, y: 16 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
-  return (
-    <section id="hero" className="relative">
-      <div className="mx-auto grid max-w-content gap-12 px-6 pb-24 pt-32 md:grid-cols-[1.1fr_0.9fr] md:items-center md:gap-16 md:pt-40">
-        {/* Left column */}
-        <motion.div
-          variants={container}
-          initial={reduce ? false : "hidden"}
-          animate="show"
-        >
-          <motion.div variants={item} className="mb-6">
-            {site.availabilityStatus && (
-              <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-xs text-accent">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-accent" aria-hidden />
-                {site.availabilityStatus}
-              </span>
-            )}
-          </motion.div>
-
-          <motion.p
-            variants={item}
-            className="font-mono text-sm uppercase tracking-[0.25em] text-muted"
-          >
-            {site.name}
-          </motion.p>
-
-          <motion.h1
-            variants={item}
-            className="mt-4 max-w-xl text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-          >
-            I build{" "}
-            <span className="text-accent">scalable</span>{" "}
-            software systems<span className="text-accent">.</span>
-          </motion.h1>
-
-          <motion.p variants={item} className="mt-6 max-w-md text-lg text-muted">
-            Full-stack development · Real-time systems · Backend architecture ·
-            Machine learning
-          </motion.p>
-
-          <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
-            <Button href="#projects" arrow>
-              Explore Projects
-            </Button>
-            <Button href="#contact" variant="secondary">
-              Get in Touch
-            </Button>
-          </motion.div>
-
-          {(hasGithub || hasLinkedin) && (
-            <motion.div variants={item} className="mt-10 flex items-center gap-5">
-              {hasGithub && (
-                <a
-                  href={site.links.github.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted transition-colors hover:text-accent"
-                >
-                  GitHub
-                </a>
-              )}
-              {hasGithub && hasLinkedin && (
-                <span aria-hidden className="h-4 w-px bg-border" />
-              )}
-              {hasLinkedin && (
-                <a
-                  href={site.links.linkedin.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted transition-colors hover:text-accent"
-                >
-                  LinkedIn
-                </a>
-              )}
-            </motion.div>
-          )}
-
-          {/* Factual, non-numeric technical highlights (Phase 20) */}
-          <motion.div variants={item} className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {technicalHighlights.map((h) => (
-              <div
-                key={h}
-                className="rounded-lg border border-border/60 bg-surface/40 px-3 py-2 text-center"
-              >
-                <span className="font-mono text-[11px] uppercase tracking-wider text-muted">
-                  {h}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Right column: terminal */}
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <Terminal />
-        </motion.div>
+  return <section id="hero" className="relative mx-auto max-w-content px-6 pb-14 pt-36 md:pb-20 md:pt-44">
+    <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
+      <div>
+        <p className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-accent/20 bg-accent/5 px-3.5 py-2 text-xs text-accent"><span className="h-1.5 w-1.5 rounded-full bg-accent" />{site.availabilityStatus}</p>
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-muted">Hello, I’m Manivasagan</p>
+        <h1 className="text-[clamp(2.8rem,6vw,5rem)] font-semibold leading-[1.06] tracking-[-0.055em]">From an idea<br />to a working<br /><span className="text-accent">product.</span></h1>
+        <p className="mt-6 max-w-md text-base leading-7 text-muted">Full Stack Developer connecting thoughtful interfaces, reliable APIs, and real-time experiences.</p>
+        <div className="mt-8 flex flex-wrap gap-3"><Button href="#projects" arrow>Explore my work</Button><Button href="/resume" variant="secondary">View résumé <ArrowUpRight size={15} /></Button></div>
+        <p className="mt-8 flex items-center gap-2 text-xs text-muted"><MapPin size={13} /> {site.location}<span className="mx-2 text-border">/</span> React · Node.js · PostgreSQL</p>
       </div>
-    </section>
-  );
+      <Terminal />
+    </div>
+    <div className="mt-16 flex flex-wrap items-center justify-between gap-5 border-t border-border pt-6 md:mt-20"><p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">From interface to infrastructure</p><a href="#projects" className="flex items-center gap-2 text-xs text-muted transition-colors hover:text-accent">Selected work <ArrowDown size={14} /></a></div>
+  </section>;
 }

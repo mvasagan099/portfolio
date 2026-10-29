@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/data/site";
 
 const NAV_ITEMS = [
-  { id: "about", label: "About" },
+  { id: "projects", label: "Work" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
+  { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -44,11 +45,13 @@ export default function Navigation() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); document.getElementById("menu-toggle")?.focus(); } };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
+
   // Close the mobile menu on navigation.
-  const go = (id: string) => {
-    setOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
-  };
 
   return (
     <header
@@ -62,13 +65,12 @@ export default function Navigation() {
         aria-label="Primary"
         className="mx-auto flex max-w-content items-center justify-between px-6 py-4"
       >
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" })}
+        <Link href="/#hero" aria-label="Mani — home"
           className="font-mono text-sm font-semibold text-foreground"
         >
           {site.shortName}
           <span className="text-accent">.</span>
-        </button>
+        </Link>
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-1 md:flex">
@@ -76,8 +78,8 @@ export default function Navigation() {
             const isActive = active === item.id;
             return (
               <li key={item.id}>
-                <button
-                  onClick={() => go(item.id)}
+                <a href={`#${item.id}`} aria-current={isActive ? "location" : undefined}
+                  onClick={() => setOpen(false)}
                   className={`relative rounded-md px-3 py-2 text-sm transition-colors ${
                     isActive ? "text-accent" : "text-muted hover:text-foreground"
                   }`}
@@ -90,7 +92,7 @@ export default function Navigation() {
                       transition={{ duration: 0.2 }}
                     />
                   )}
-                </button>
+                </a>
               </li>
             );
           })}
@@ -98,7 +100,7 @@ export default function Navigation() {
 
         {/* Mobile menu toggle */}
         <button
-          className="md:hidden"
+          id="menu-toggle" aria-controls="mobile-menu" className="md:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -119,7 +121,7 @@ export default function Navigation() {
 
       {/* Mobile menu */}
       {open && (
-        <motion.ul
+        <motion.ul id="mobile-menu"
           initial={reduce ? false : { opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           transition={{ duration: 0.2 }}
@@ -127,12 +129,12 @@ export default function Navigation() {
         >
           {NAV_ITEMS.map((item) => (
             <li key={item.id}>
-              <button
-                onClick={() => go(item.id)}
+              <a href={`#${item.id}`}
+                onClick={() => setOpen(false)}
                 className="block w-full py-3 text-left text-base text-muted hover:text-foreground"
               >
                 {item.label}
-              </button>
+              </a>
             </li>
           ))}
         </motion.ul>

@@ -1,42 +1,17 @@
+"use client";
+import { useState } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Reveal from "@/components/ui/Reveal";
 import FeaturedProject from "@/components/sections/FeaturedProject";
 import { projects } from "@/data/projects";
-
+const categories = ["All work", ...new Set(projects.map(p=>p.category))];
 export default function Projects() {
-  const featured = projects
-    .filter((p) => p.featured)
-    .sort((a, b) => a.order - b.order);
-
-  if (featured.length === 0) {
-    return (
-      <section id="projects" className="mx-auto max-w-content px-6 py-24">
-        <SectionHeading
-          id="projects"
-          kicker="Projects"
-          title="Selected work."
-        />
-        <p className="mt-6 text-muted">
-          Project data has not been added yet.
-        </p>
-      </section>
-    );
-  }
-
-  return (
-    <section id="projects" className="mx-auto max-w-content px-6 py-24">
-      <SectionHeading
-        id="projects"
-        kicker="Projects"
-        title="Selected work."
-      />
-      <div className="mt-12 space-y-8">
-        {featured.map((p, i) => (
-          <Reveal key={p.slug} delay={(i % 2) * 0.1}>
-            <FeaturedProject project={p} />
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
+  const [category,setCategory]=useState("All work");
+  const visible=projects.filter(p=>category==="All work"||p.category===category).sort((a,b)=>a.order-b.order);
+  return <section id="projects" className="mx-auto max-w-content px-6 py-20">
+    <SectionHeading id="projects" kicker="Selected work" title="Built to solve real problems." />
+    <p className="mt-5 max-w-xl leading-7 text-muted">A closer look at the applications I’m building, the decisions behind them, and what I’m learning along the way.</p>
+    <div role="group" aria-label="Filter projects" className="mb-8 mt-8 flex flex-wrap gap-2">{categories.map(c=><button key={c} onClick={()=>setCategory(c)} aria-pressed={category===c} className={`rounded-full border px-4 py-2 text-xs transition-colors ${category===c?'border-accent/40 bg-accent/10 text-accent':'border-border text-muted hover:border-accent/40 hover:text-foreground'}`}>{c}</button>)}</div>
+    <p className="sr-only" role="status">{visible.length} projects shown</p>
+    <div className="grid gap-6 md:grid-cols-2">{visible.map(p=><FeaturedProject key={p.slug} project={p} />)}</div>
+  </section>;
 }
