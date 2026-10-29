@@ -1,15 +1,7 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
-
+import { siteUrl } from "@/lib/site-url";
+export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.SITE_URL ?? "https://example.com";
-  const projectRoutes = projects.map((p) => ({
-    url: `${base}/projects/${p.slug}`,
-    lastModified: new Date(),
-  }));
-
-  return [
-    { url: base, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
-    ...projectRoutes,
-  ];
+  return [{ url: `${siteUrl}/`, changeFrequency: "monthly", priority: 1 }, { url: `${siteUrl}/resume/`, changeFrequency: "monthly", priority: 0.7 }, ...projects.map(p=>({ url: `${siteUrl}/projects/${p.slug}/`, changeFrequency: "monthly" as const, priority: 0.8 }))];
 }

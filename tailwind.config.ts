@@ -9,12 +9,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#0B0B0F",
-        surface: "#131318",
-        surfaceAlt: "#18181F",
-        border: "#262630",
+        background: "#0B1010",
+        surface: "#101717",
+        surfaceAlt: "#172020",
+        border: "#263231",
         foreground: "#EDEDF0",
-        muted: "#9CA3AF",
+        muted: "#A1AEAC",
         accent: "#6EE7B7",
         accentStrong: "#34D399",
         "accent-dim": "#10B981",

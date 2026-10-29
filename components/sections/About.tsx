@@ -11,7 +11,7 @@ export default function About() {
       <SectionHeading
         id="about"
         kicker="About"
-        title="Building with curiosity, engineering with purpose."
+        title="Curious by nature. Practical by approach."
       />
 
       <div className="mt-12 grid gap-12 md:grid-cols-2">
@@ -19,15 +19,15 @@ export default function About() {
         <div>
           <h3 className="mb-4 text-lg font-semibold text-foreground">About Me</h3>
           <p className="leading-relaxed text-muted">
-            I am a software developer focused on building systems that are
-            real, reliable, and understandable. I care about the whole
-            engineering loop — from understanding a problem and choosing an
-            architecture, to shipping and iterating on it in production.
+            I’m a Full Stack Developer based in Chennai, working at Lords and
+            Kings Enterprises Private Limited. My work takes me from React
+            interfaces to Node.js services, databases, and deployment.
           </p>
           <p className="mt-4 leading-relaxed text-muted">
-            My work spans full-stack web applications, real-time systems, and
-            applied machine learning — with an emphasis on clean structure,
-            sound backend design, and measurable outcomes.
+            I enjoy the parts where systems meet real life: a player reconnecting
+            mid-match, an attendance record reaching HR, or a mobile app returning
+            from the camera. I’m also exploring machine learning with Python,
+            with a focus on careful evaluation.
           </p>
         </div>
 
@@ -55,12 +55,9 @@ function TimelineProgression() {
   return (
     <ol className="relative space-y-0">
       {/* Animated connecting line */}
-      <span
-        aria-hidden
-        className="absolute left-[7px] top-2 bottom-2 w-px bg-border"
-      />
+
       {timeline.map((item, i) => (
-        <TimelineRow key={item.label} label={item.label} index={i} reduce={!!reduce} />
+        <TimelineRow key={item.label} label={item.label} description={item.description} index={i} reduce={!!reduce} />
       ))}
     </ol>
   );
@@ -68,10 +65,12 @@ function TimelineProgression() {
 
 function TimelineRow({
   label,
+  description,
   index,
   reduce,
 }: {
   label: string;
+  description: string;
   index: number;
   reduce: boolean;
 }) {
@@ -94,7 +93,7 @@ function TimelineRow({
         )}
       </span>
       <div>
-        <p className="font-medium text-foreground">{label}</p>
+        <p className="font-medium text-foreground">{label}</p><p className="mt-1 text-sm leading-6 text-muted">{description}</p>
       </div>
     </li>
   );
@@ -102,7 +101,7 @@ function TimelineRow({
 
 function EngineeringPrinciples() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {engineeringPrinciples.map((p, i) => (
         <Reveal key={p.number} delay={i * 0.05}>
           <div className="h-full rounded-xl border border-border/60 bg-surface/40 p-5 transition-colors hover:border-accent/30">

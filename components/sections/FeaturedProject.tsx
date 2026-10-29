@@ -1,65 +1,15 @@
-"use client";
-
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/types";
-import ProjectArchitecture from "@/components/ui/ProjectArchitecture";
-import Button from "@/components/ui/Button";
-
-/**
- * Large featured-project layout (Phase 11). Strongest visual treatment is
- * reserved for the flagship Gaming Hub project (real-time/backend).
- */
+import ProjectArtwork from "@/components/ui/ProjectArtwork";
 export default function FeaturedProject({ project }: { project: Project }) {
-  const index = String(project.order).padStart(2, "0");
-
-  return (
-    <article className="group relative overflow-hidden rounded-2xl border border-border/70 bg-surface/30 transition-colors duration-300 hover:border-accent/40">
-      <div className="grid gap-8 p-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-        {/* Left: copy */}
-        <div>
-          <span className="font-mono text-sm text-muted">{index}</span>
-          <h3 className="mt-2 flex items-center gap-3 text-2xl font-bold tracking-tight text-foreground transition-transform duration-300 group-hover:-translate-y-0.5">
-            {project.title}
-          </h3>
-          <p className="mt-3 text-muted">{project.shortDescription}</p>
-
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.technologies.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-border/60 bg-surfaceAlt/50 px-2.5 py-1 text-xs text-muted"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button href={`/projects/${project.slug}`} variant="secondary" arrow>
-              View Case Study
-            </Button>
-            {project.githubUrl && (
-              <Button
-                href={project.githubUrl}
-                variant="ghost"
-                external
-              >
-                GitHub
-              </Button>
-            )}
-          </div>
-        </div>
-
-        {/* Right: visual */}
-        <div className="relative">
-          {project.architecture?.enabled ? (
-            <ProjectArchitecture project={project} />
-          ) : (
-            <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-border text-sm text-muted">
-              Project visual coming soon
-            </div>
-          )}
-        </div>
-      </div>
-    </article>
-  );
+  return <article className="project-card group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface/60 transition-colors hover:border-accent/40">
+    <Link href={`/projects/${project.slug}`} tabIndex={-1} aria-hidden="true" className="block overflow-hidden border-b border-border"><ProjectArtwork slug={project.slug} /></Link>
+    <div className="flex flex-1 flex-col p-6 sm:p-7"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-accent">{project.category}</p>
+      <h3 className="mt-3 text-2xl font-semibold tracking-tight"><Link className="transition-colors hover:text-accent" href={`/projects/${project.slug}`}>{project.title}</Link></h3>
+      <p className="mt-2 text-sm leading-6 text-muted">{project.shortDescription}</p>
+      <div className="my-5 flex flex-wrap gap-2">{project.technologies.slice(0,5).map(t=><span key={t} className="rounded-md border border-border px-2 py-1 font-mono text-[10px] text-muted">{t}</span>)}</div>
+      <Link href={`/projects/${project.slug}`} className="mt-auto flex items-center justify-between border-t border-border pt-5 text-sm transition-colors hover:text-accent">Explore project <ArrowUpRight size={18} className="text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
+    </div>
+  </article>;
 }

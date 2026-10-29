@@ -16,7 +16,7 @@ export const skillCategories: SkillCategory[] = [
     description: "Designing APIs and services.",
     skills: [
       { name: "Node.js", icon: "node" },
-      { name: "NestJS", icon: "nest" },
+      { name: "Fastify", icon: "api" },
       { name: "REST APIs", icon: "api" },
       { name: "WebSockets", icon: "socket" },
     ],
@@ -42,7 +42,17 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Machine Learning",
+    title: "Mobile & Platforms",
+    description: "Bringing web and native capabilities together.",
+    skills: [
+      { name: "Flutter", icon: "flutter" },
+      { name: "Dart", icon: "dart" },
+      { name: "Capacitor", icon: "capacitor" },
+      { name: "Supabase", icon: "supabase" },
+    ],
+  },
+  {
+    title: "Applied ML · Exploring",
     description: "Building applied models.",
     skills: [
       { name: "Python", icon: "python" },

@@ -1,16 +1,4 @@
+import Link from "next/link";
+import { ArrowUpRight, ArrowUp } from "lucide-react";
 import { site } from "@/data/site";
-
-export default function Footer() {
-  return (
-    <footer className="border-t border-border/60">
-      <div className="mx-auto flex max-w-content flex-col items-center justify-between gap-4 px-6 py-10 sm:flex-row">
-        <p className="font-mono text-sm text-muted">
-          © {new Date().getFullYear()} {site.name}
-        </p>
-        <p className="font-mono text-xs text-muted">
-          Designed &amp; built with care.
-        </p>
-      </div>
-    </footer>
-  );
-}
+export default function Footer() {return <footer className="border-t border-border/60"><div className="mx-auto max-w-content px-6 py-10"><div className="flex flex-wrap items-center justify-between gap-6"><Link href="/" className="text-2xl font-semibold tracking-tight">Mani<span className="text-accent">.</span></Link><div className="flex flex-wrap items-center gap-6 text-xs text-muted"><a className="flex items-center gap-1 hover:text-accent" href={site.links.github.url} target="_blank" rel="noopener noreferrer">GitHub<ArrowUpRight size={12} /></a><a className="flex items-center gap-1 hover:text-accent" href={site.links.linkedin.url} target="_blank" rel="noopener noreferrer">LinkedIn<ArrowUpRight size={12} /></a><Link className="hover:text-accent" href="/resume/">Résumé</Link><Link href="/#hero" className="flex items-center gap-2 hover:text-accent">Back to top<ArrowUp size={13} /></Link></div></div><div className="mt-8 flex flex-wrap justify-between gap-3 border-t border-border/60 pt-6 font-mono text-[10px] text-muted/70"><p>© {new Date().getFullYear()} {site.name}</p><p>Thoughtfully built in Chennai. Always evolving.</p></div></div></footer>;}

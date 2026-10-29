@@ -16,6 +16,7 @@ export type Project = {
   architecture?: {
     enabled: boolean;
     type?: string;
+    layers: string[][];
   };
   challenges?: {
     challenge: string;
