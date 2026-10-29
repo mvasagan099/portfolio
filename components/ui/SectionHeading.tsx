@@ -3,11 +3,13 @@
 import Reveal from "@/components/ui/Reveal";
 
 export const sectionOrder = [
+  { id: "capabilities", label: "WHAT I BRING" },
   { id: "projects", label: "SELECTED WORK" },
   { id: "skills", label: "SKILLS" },
   { id: "experience", label: "EXPERIENCE" },
   { id: "about", label: "ABOUT" },
   { id: "github", label: "SOURCE CODE" },
+  { id: "faq", label: "QUESTIONS" },
   { id: "contact", label: "CONTACT" },
 ] as const;
 
@@ -37,7 +39,7 @@ export default function SectionHeading({ id, title, kicker, className }: Section
         <span aria-hidden className="h-px flex-1 bg-border" />
       </div>
       {title && (
-        <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-[-.04em] text-foreground sm:text-[2.65rem] sm:leading-[1.12]">
           {title}
         </h2>
       )}

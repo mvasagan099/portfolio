@@ -224,5 +224,113 @@ export const projects: Project[] = [
     ],
     "featured": true,
     "order": 4
+  },
+  {
+    "slug": "coupon-platform",
+    "title": "Coupon Platform",
+    "shortDescription": "Connecting purchases, redemption, and account workflows.",
+    "oneLiner": "A standalone coupon-management platform with redemption APIs and account security workflows.",
+    "longDescription": "A coupon platform with purchase and redemption flows, redemption history, support tickets, and API-based integration with a separate application wallet. The work also includes two-factor authentication and country-aware currency handling.",
+    "technologies": [
+      "React",
+      "Node.js",
+      "REST APIs",
+      "PostgreSQL",
+      "2FA"
+    ],
+    "category": "Platforms",
+    "status": "Ongoing development",
+    "problem": "Coupon purchases and redemptions need a clear record of what happened, while integrations need a consistent way to verify and redeem a coupon.",
+    "approach": "Separate purchase, verification, and redemption workflows. Provide a redemption API, expose account history to users, and add authentication checks around sensitive account actions.",
+    "architecture": {
+      "enabled": true,
+      "type": "Workflow overview",
+      "layers": [
+        [
+          "Purchase + account interface"
+        ],
+        [
+          "Coupon verification",
+          "Redemption API"
+        ],
+        [
+          "Transaction history",
+          "Support workflows"
+        ]
+      ]
+    },
+    "challenges": [
+      {
+        "challenge": "Keeping redemption useful across applications.",
+        "solution": "Provide dedicated verification and redemption endpoints with a visible redemption history."
+      },
+      {
+        "challenge": "Protecting sensitive account workflows.",
+        "solution": "Add authenticator and email OTP flows alongside withdrawal verification."
+      }
+    ],
+    "learned": [
+      "Designing service boundaries around an existing product workflow.",
+      "Handling currency display and account verification consistently."
+    ],
+    "futureImprovements": [
+      "Expand integration and failure-path testing.",
+      "Make account and redemption feedback clearer."
+    ],
+    "order": 5,
+    "featured": true
+  },
+  {
+    "slug": "workforce-website",
+    "title": "Workforce & Security Website",
+    "shortDescription": "A clear digital presence for a people-focused business.",
+    "oneLiner": "A responsive website presenting manpower and security services with a straightforward enquiry path.",
+    "longDescription": "A company website for manpower and security services, with work on page structure, animation, responsive layouts, and service messaging. The project includes the L&K HiringsPro hiring presence and updates to manpower-service content.",
+    "technologies": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Responsive design"
+    ],
+    "category": "Platforms",
+    "status": "Website development & updates",
+    "problem": "Visitors need to understand the available services quickly, navigate comfortably on mobile, and find the next step without unnecessary friction.",
+    "approach": "Organize content around the services and the visitor’s intent. Use a consistent visual theme, readable layouts, and restrained animation while refining service pages.",
+    "architecture": {
+      "enabled": true,
+      "type": "Visitor journey",
+      "layers": [
+        [
+          "Discover services"
+        ],
+        [
+          "Explore manpower",
+          "Explore security"
+        ],
+        [
+          "Enquiry + hiring information"
+        ]
+      ]
+    },
+    "challenges": [
+      {
+        "challenge": "Making different service offerings easy to scan.",
+        "solution": "Give each service a clear place in the page structure and navigation."
+      },
+      {
+        "challenge": "Balancing animation with mobile usability.",
+        "solution": "Refine responsive layouts and keep motion secondary to readable content."
+      }
+    ],
+    "learned": [
+      "Translating business services into a coherent site structure.",
+      "Iterating on content and responsive presentation together."
+    ],
+    "futureImprovements": [
+      "Continue accessibility and performance reviews.",
+      "Add more genuine service imagery when available."
+    ],
+    "order": 6,
+    "featured": true
   }
 ];

@@ -31,9 +31,9 @@ export default function Contact() {
     <section id="contact" className="mx-auto max-w-content px-6 py-24">
       <SectionHeading id="contact" kicker="Contact" title="" />
 
-      <div className="mt-12 rounded-2xl border border-border/70 bg-surface/30 p-8 sm:p-12">
+      <div className="contact-banner relative mt-10 overflow-hidden rounded-3xl border border-accent/20 p-8 sm:p-14">
         <h2 className="max-w-2xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-          Let&apos;s build something<span className="text-accent">.</span>
+          Let&apos;s make the next<br />good thing happen<span className="text-accent">.</span>
         </h2>
         <p className="mt-5 max-w-xl text-lg text-muted">
           Looking for a developer who enjoys working across the stack?

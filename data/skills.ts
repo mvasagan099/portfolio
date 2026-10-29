@@ -42,6 +42,16 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    title: "Mobile & Platforms",
+    description: "Bringing web and native capabilities together.",
+    skills: [
+      { name: "Flutter", icon: "flutter" },
+      { name: "Dart", icon: "dart" },
+      { name: "Capacitor", icon: "capacitor" },
+      { name: "Supabase", icon: "supabase" },
+    ],
+  },
+  {
     title: "Applied ML · Exploring",
     description: "Building applied models.",
     skills: [

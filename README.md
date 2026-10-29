@@ -1,6 +1,6 @@
 # Manivasagan A. — Portfolio
 
-A responsive developer portfolio built with Next.js 15, React 19, TypeScript, Tailwind CSS, and Framer Motion. The site includes four engineering case studies, project filters, work experience, direct contact links, and a printable résumé.
+A responsive developer portfolio built with Next.js 15, React 19, TypeScript, Tailwind CSS, and Framer Motion. The site includes six engineering case studies, project filters, work experience, direct contact links, and a printable résumé.
 
 ## Development
 
@@ -38,3 +38,5 @@ Keyboard navigation, skip link, mobile menu with Escape support, active-section 
 ## Scope and remaining owner choices
 
 The site is complete using confirmed profile details. Add genuine project screenshots or public demo URLs in the data when available. Education has no invented graduation date; there are no fabricated certifications, testimonials, or impact metrics.
+
+Visual additions include an original CSS developer orbit, six distinct project illustrations, capability cards, a stack strip, native expandable FAQs, and mobile development skills. Illustrations are conceptual artwork; system diagrams remain available within case studies.
