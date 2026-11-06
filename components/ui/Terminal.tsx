@@ -1,109 +1,23 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { Braces, GitBranch } from "lucide-react";
 import { hero } from "@/data/site";
 
-/**
- * Reusable, purely-visual developer terminal. Not a real shell.
- * Data-driven from site config, with typing/reveal animation and
- * full reduced-motion support (shows the complete terminal instantly).
- */
 export default function Terminal() {
-  const reduce = useReducedMotion();
-  const [visible, setVisible] = useState(reduce ?? false);
-
-  useEffect(() => {
-    if (reduce) return;
-    const t = setTimeout(() => setVisible(true), 400);
-    return () => clearTimeout(t);
-  }, [reduce]);
-
-  const blocks = [
-    { cmd: "$ whoami", out: [hero.whoami] },
-    { cmd: "$ focus", out: hero.focus },
-    { cmd: "$ stack", out: hero.stack },
-    { cmd: "$ status", out: [hero.status] },
-  ];
-
-  return (
-    <div className="overflow-hidden rounded-xl border border-border bg-surface text-sm shadow-2xl">
-      <TerminalChrome />
-      <div className="min-h-[22rem] space-y-2 p-5 font-mono text-[13px] leading-relaxed">
-        {reduce ? (
-          blocks.map((b, i) => (
-            <div key={i}>
-              <div className="text-foreground">
-                <span className="text-accent">❯</span> {b.cmd}
-              </div>
-              <div className="mb-2 mt-1 text-muted">
-                {b.out.map((line, j) => (
-                  <div key={j}>{line}</div>
-                ))}
-              </div>
-            </div>
-          ))
-        ) : (
-          <>
-            {visible && blocks.map((b, i) => <TypedBlock key={i} block={b} start={i * 850} />)}
-          </>
-        )}
-        <div className="flex items-center text-accent">
-          <span>❯</span>
-          <Cursor />
-        </div>
+  return <div className="relative min-w-0">
+    <div aria-hidden className="absolute -inset-8 -z-10 rounded-full bg-accent/[0.04] blur-3xl" />
+    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl">
+      <div className="flex items-center justify-between border-b border-border px-5 py-4"><span className="flex items-center gap-2 font-mono text-xs text-muted"><Braces size={15} className="text-accent" /> developer.ts</span><span className="flex gap-1.5" aria-hidden>{[1,2,3].map(i=><span key={i} className="h-2 w-2 rounded-full bg-border" />)}</span></div>
+      <div className="overflow-x-auto p-6 font-mono text-[12px] leading-7 sm:p-8 sm:text-[13px]">
+        <p><span className="text-violet-300">const</span> developer <span className="text-muted">= &#123;</span></p>
+        <p className="pl-5"><span className="text-muted">name:</span> <span className="text-accent">&quot;{hero.whoami}&quot;</span>,</p>
+        <p className="pl-5"><span className="text-muted">role:</span> <span className="text-accent">&quot;Full Stack Developer&quot;</span>,</p>
+        <p className="pl-5 text-muted">stack: [</p>
+        {hero.stack.map((t,i)=><p key={t} className="pl-10 text-amber-200/90">&quot;{t}&quot;{i<hero.stack.length-1?',':''}</p>)}
+        <p className="pl-5 text-muted">],</p>
+        <p className="pl-5"><span className="text-muted">mindset:</span> <span className="text-accent">&quot;Keep building.&quot;</span></p>
+        <p className="text-muted">&#125;;</p>
+        <p className="mt-6 text-muted"><span className="text-accent">❯</span> {hero.status}<span aria-hidden className="ml-1 inline-block h-3 w-1.5 animate-pulse bg-accent align-middle" /></p>
       </div>
+      <div className="flex items-center justify-between border-t border-border bg-surfaceAlt/50 px-5 py-3 font-mono text-[10px] text-muted"><span className="flex items-center gap-1.5"><GitBranch size={12} /> main</span><span>Always a work in progress</span></div>
     </div>
-  );
-}
-
-function TerminalChrome() {
-  return (
-    <div className="flex items-center gap-2 border-b border-border bg-surfaceAlt px-4 py-2.5">
-      <span className="h-3 w-3 rounded-full bg-red-400/70" />
-      <span className="h-3 w-3 rounded-full bg-amber-400/70" />
-      <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
-      <span className="ml-2 font-mono text-xs text-muted">~/developer</span>
-    </div>
-  );
-}
-
-function Cursor() {
-  return (
-    <span className="ml-1 inline-block h-3.5 w-2 animate-pulse bg-accent" aria-hidden />
-  );
-}
-
-function TypedBlock({
-  block,
-  start,
-}: {
-  block: { cmd: string; out: string[] };
-  start: number;
-}) {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setShow(true), start);
-    return () => clearTimeout(t);
-  }, [start]);
-
-  if (!show) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div className="text-foreground">
-        <span className="text-accent">❯</span> {block.cmd}
-      </div>
-      <div className="mb-2 mt-1 text-muted">
-        {block.out.map((line, j) => (
-          <div key={j}>{line}</div>
-        ))}
-      </div>
-    </motion.div>
-  );
+  </div>;
 }

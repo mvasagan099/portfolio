@@ -1,48 +1,42 @@
 # Manivasagan A. — Portfolio
 
-Software developer portfolio built with Next.js, Tailwind CSS, and Motion (Framer Motion).
+A responsive developer portfolio built with Next.js 15, React 19, TypeScript, Tailwind CSS, and Framer Motion. The site includes six engineering case studies, project filters, work experience, direct contact links, and a printable résumé.
 
-## Getting started
-
-```bash
-npm install
-npm run dev        # http://localhost:3000
-```
-
-## Production
+## Development
 
 ```bash
-npm run build      # static + SSG output
-npm start          # serve built output
-SITE_URL=... npm run build   # sets metadata base + sitemap/robots
+npm ci
+npm run dev
 ```
 
-## Project structure
+## Verify and build
 
-```
-app/                 # Next.js App Router (home, case studies, sitemap, robots)
-components/
-  ui/                # Reusable primitives: Button, Reveal, Terminal, SectionHeading…
-  sections/          # Page sections: Hero, About, Skills, Projects, Experience…
-data/                # All content (single source of truth — no content in components)
-types/               # Shared TypeScript models (Project, SkillCategory…)
+```bash
+npm run check
+npm run build
+npm run check
 ```
 
-## Data-driven content
+The production output is `out/`. Deploy this directory to a static host; no database, server runtime, API keys, or external font downloads are required. Use `npm start` to serve the static export locally with the included Node.js server.
 
-Edit the files in `data/` to update the site:
+Set `SITE_URL` to the exact deployed origin when building for a different domain. This configures canonical URLs, robots.txt, and the sitemap. The default origin points to the companion ChatGPT Site.
 
-| File | Contents |
-| ---- | -------- |
-| `data/site.ts` | Name, availability status, hero terminal values, links, experience, achievements, GitHub repos |
-| `data/skills.ts` | Skill categories and technologies |
-| `data/projects.ts` | Featured projects and case-study content |
+## Content
 
-Everything renders from this data — nothing is hardcoded in components.
+- `data/site.ts`: contact links, biography, experience, education, and public repository links.
+- `data/projects.ts`: all project summaries, diagrams, and case studies.
+- `data/skills.ts`: grouped technical skills.
+- `/resume/`: printable résumé; Print / Save PDF opens the browser print dialog.
+- `/projects/[slug]/`: canonical case studies. The original `/project/[slug]/` links also resolve.
 
-## Important
+The project visuals are labeled architecture/workflow schematics, not product screenshots. Private project repositories and unverified live demos are not exposed. Market-model research is explicitly described as inconclusive research in paper/shadow mode.
 
-- Personal fields in `data/site.ts` that are not yet confirmed are intentionally
-  left as placeholders (e.g. `github-username`, `hello@example.com`) so nothing
-  fabricated goes live. Fill them before deploying.
-- Reduced motion, keyboard focus, and touch-device behaviour are supported.
+## Accessibility
+
+Keyboard navigation, skip link, mobile menu with Escape support, active-section links, reduced-motion support, semantic project-filter buttons, and clipboard failure feedback are included. All content is present in the initial HTML.
+
+## Scope and remaining owner choices
+
+The site is complete using confirmed profile details. Add genuine project screenshots or public demo URLs in the data when available. Education has no invented graduation date; there are no fabricated certifications, testimonials, or impact metrics.
+
+Visual additions include an original CSS developer orbit, six distinct project illustrations, capability cards, a stack strip, native expandable FAQs, and mobile development skills. Illustrations are conceptual artwork; system diagrams remain available within case studies.

@@ -5,6 +5,7 @@ import type { Project } from "@/types";
 import ProjectArchitecture from "@/components/ui/ProjectArchitecture";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import { isProfileUrl } from "@/lib/links";
 
 /**
  * Case study detail page content. Every field renders from prop data only —
@@ -12,12 +13,12 @@ import Reveal from "@/components/ui/Reveal";
  */
 export default function CaseStudy({ project }: { project: Project }) {
   return (
-    <main className="mx-auto max-w-content px-6 py-24">
+    <main id="main" className="mx-auto max-w-content px-6 py-24">
       <Link
-        href="/"
+        href="/#projects"
         className="font-mono text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
       >
-        ← Back
+        ← All projects
       </Link>
 
       <header className="mt-10">
@@ -35,7 +36,9 @@ export default function CaseStudy({ project }: { project: Project }) {
         )}
       </header>
 
-      <Section title="Overview" body={project.problem} />
+      <Section title="Overview" body={project.longDescription} />
+      <Section title="The problem" body={project.problem} />
+      <Section title="My approach" body={project.approach} />
 
       {project.architecture?.enabled && (
         <div className="mt-16">
@@ -139,7 +142,7 @@ export default function CaseStudy({ project }: { project: Project }) {
       )}
 
       <div className="mt-20 flex flex-wrap gap-3">
-        {project.githubUrl && (
+        {project.githubUrl && isProfileUrl(project.githubUrl) && (
           <Button href={project.githubUrl} external arrow>
             GitHub
           </Button>
@@ -151,10 +154,11 @@ export default function CaseStudy({ project }: { project: Project }) {
         )}
         {!project.githubUrl && !project.liveUrl && (
           <p className="text-sm text-muted">
-            Repository links will appear here once available.
+            This case study describes the engineering work. Source code and live access are not publicly listed.
           </p>
         )}
       </div>
+      <div className="mt-16 border-t border-border pt-8"><Button href="/#contact" variant="secondary" arrow>Talk about this project</Button></div>
     </main>
   );
 }

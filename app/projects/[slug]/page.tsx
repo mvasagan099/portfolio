@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
 import CaseStudy from "@/components/sections/CaseStudy";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
@@ -16,7 +18,9 @@ export async function generateMetadata({
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.title} — ${project.shortDescription}`,
+    title: project.title,
+    alternates: { canonical: `/projects/${project.slug}/` },
+    openGraph: { title: project.title, description: project.shortDescription, url: `/projects/${project.slug}/` },
     description: project.shortDescription,
   };
 }

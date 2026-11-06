@@ -1,5 +1,6 @@
 "use client";
 
+import { Code2, Server, Database, Boxes, Smartphone, FlaskConical } from "lucide-react";
 import type { SkillCategory } from "@/types";
 import { Reveal } from "@/components";
 import { SkillIcon } from "@/components/ui/SkillIcon";
@@ -15,10 +16,11 @@ export default function SkillCategory({
   category: SkillCategory;
   index: number;
 }) {
+  const Icon = [Code2, Server, Database, Boxes, Smartphone, FlaskConical][index % 6];
   return (
     <Reveal delay={(index % 3) * 0.08}>
-      <section className="rounded-xl border border-border bg-surface/40 p-6">
-        <div className="mb-4">
+      <section className="skill-panel h-full rounded-2xl border border-border bg-surface/40 p-6">
+        <div className="mb-6"><Icon size={23} className="mb-5 text-accent/80" />
           <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
             {category.title}
           </h3>

@@ -5,6 +5,10 @@ type SkillIconProps = {
 
 // Simple monogram glyphs (no brand SVG library, no emojis).
 const glyphs: Record<string, string> = {
+  flutter: "FL",
+  dart: "DT",
+  capacitor: "CP",
+  supabase: "SB",
   next: "N",
   react: "R",
   typescript: "TS",
