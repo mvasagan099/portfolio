@@ -1,1 +1,11 @@
-export default function Background(){return <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[1000px] overflow-hidden"><div className="absolute -right-40 -top-32 h-[750px] w-[750px] rounded-full bg-accent/[.035] blur-[100px]" /><div className="absolute inset-0 bg-grid mask-fade-b opacity-40" /></div>;}
+export default function Background() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[1000px] overflow-hidden"
+    >
+      <div className="absolute -right-40 -top-32 h-[750px] w-[750px] rounded-full bg-accent/[.035] blur-[100px]" />
+      <div className="absolute inset-0 bg-grid mask-fade-b opacity-40" />
+    </div>
+  );
+}

@@ -4,7 +4,11 @@ import { skillCategories } from "@/data/skills";
 
 export default function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-content px-6 py-24">
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      className="mx-auto max-w-content px-6 py-24"
+    >
       <SectionHeading
         id="skills"
         kicker="Skills"

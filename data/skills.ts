@@ -8,8 +8,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "Next.js", icon: "next" },
       { name: "React", icon: "react" },
       { name: "TypeScript", icon: "typescript" },
-      { name: "Tailwind CSS", icon: "tailwind" },
-    ],
+      { name: "Tailwind CSS", icon: "tailwind" }
+    ]
   },
   {
     title: "Backend",
@@ -18,8 +18,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "Node.js", icon: "node" },
       { name: "Fastify", icon: "api" },
       { name: "REST APIs", icon: "api" },
-      { name: "WebSockets", icon: "socket" },
-    ],
+      { name: "WebSockets", icon: "socket" }
+    ]
   },
   {
     title: "Databases",
@@ -28,8 +28,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "PostgreSQL", icon: "postgres" },
       { name: "MySQL", icon: "mysql" },
       { name: "Redis", icon: "redis" },
-      { name: "Prisma", icon: "prisma" },
-    ],
+      { name: "Prisma", icon: "prisma" }
+    ]
   },
   {
     title: "DevOps / Infrastructure",
@@ -38,8 +38,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "Docker", icon: "docker" },
       { name: "Nginx", icon: "nginx" },
       { name: "Git", icon: "git" },
-      { name: "CI/CD", icon: "cicd" },
-    ],
+      { name: "CI/CD", icon: "cicd" }
+    ]
   },
   {
     title: "Mobile & Platforms",
@@ -48,17 +48,17 @@ export const skillCategories: SkillCategory[] = [
       { name: "Flutter", icon: "flutter" },
       { name: "Dart", icon: "dart" },
       { name: "Capacitor", icon: "capacitor" },
-      { name: "Supabase", icon: "supabase" },
-    ],
+      { name: "Supabase", icon: "supabase" }
+    ]
   },
   {
-    title: "Applied ML · Exploring",
+    title: "Machine Learning · Exploring",
     description: "Building applied models.",
     skills: [
       { name: "Python", icon: "python" },
       { name: "XGBoost", icon: "xgboost" },
       { name: "Pandas", icon: "pandas" },
-      { name: "Scikit-learn", icon: "sklearn" },
-    ],
-  },
+      { name: "Scikit-learn", icon: "sklearn" }
+    ]
+  }
 ];

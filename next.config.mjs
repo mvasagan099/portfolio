@@ -4,6 +4,6 @@ const nextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
   images: { unoptimized: true },
-  experimental: { cpus: 2 },
+  experimental: { cpus: 2 }
 };
 export default nextConfig;

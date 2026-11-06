@@ -1,77 +1,45 @@
-"use client";
-
-import { useState } from "react";
+import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import SocialLinks from "@/components/ui/SocialLinks";
+import LazyContactForm from "@/components/ui/LazyContactForm";
+import CopyEmail from "@/components/ui/CopyEmail";
 import { site } from "@/data/site";
-import { isConfiguredEmail } from "@/lib/links";
-
-/**
- * Final contact CTA (Phase 21). Professional tone. Uses a directly usable
- * mailto link (no backend) with copy-to-clipboard feedback.
- */
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
-  const [copyError, setCopyError] = useState(false);
-  const emailConfigured = isConfiguredEmail(site.links.email);
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(site.links.email);
-      setCopyError(false);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      setCopyError(true);
-    }
-  };
-
   return (
-    <section id="contact" className="mx-auto max-w-content px-6 py-24">
-      <SectionHeading id="contact" kicker="Contact" title="" />
-
-      <div className="contact-banner relative mt-10 overflow-hidden rounded-3xl border border-accent/20 p-8 sm:p-14">
-        <h2 className="max-w-2xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-          Let&apos;s make the next<br />good thing happen<span className="text-accent">.</span>
-        </h2>
-        <p className="mt-5 max-w-xl text-lg text-muted">
-          Looking for a developer who enjoys working across the stack?
-          I’m open to developer roles and conversations about thoughtful
-          web and mobile products.
-        </p>
-
-        <div className="mt-10 space-y-6">
-          {emailConfigured ? (
-            <>
-              <div className="flex flex-wrap items-center gap-4">
-                <Button href={`mailto:${site.links.email}`} arrow>
-                  Get In Touch
-                </Button>
-                <button
-                  onClick={copyEmail}
-                  className="group inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent"
-                  aria-live="polite"
-                >
-                  {site.links.email}
-                  <span className="text-xs text-accent">
-                    {copied ? "copied ✓" : "copy"}
-                  </span>
-                </button>
-              </div>
-            </>
-          ) : (
-            <p className="text-sm text-muted">
-              Contact details will appear here once configured in{" "}
-              <code>data/site.ts</code>.
-            </p>
-          )}
-
-          {copyError && <p role="status" className="text-sm text-muted">Couldn’t copy automatically. Select the email address or use Get In Touch to open your email app.</p>}
-          <p className="text-xs text-muted">Chennai, India · Open to remote opportunities</p>
+    <Container
+      as="section"
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="section-space"
+    >
+      <SectionHeading
+        id="contact"
+        kicker="Contact"
+        title="Let’s build something useful."
+      />
+      <div className="contact-banner mt-10 grid gap-10 overflow-hidden rounded-2xl border border-accent/20 p-5 sm:p-8 lg:grid-cols-[.8fr_1.2fr]">
+        <div className="lg:py-6">
+          <p className="max-w-md text-base leading-8 text-muted">
+            Looking for a developer who enjoys working across the stack? I’m
+            open to developer roles and conversations about web and mobile
+            products.
+          </p>
+          <div className="mt-7">
+            <Button href={`mailto:${site.links.email}`} arrow>
+              Email me directly
+            </Button>
+          </div>
+          <div className="mt-5">
+            <CopyEmail email={site.links.email} />
+          </div>
+          <p className="my-6 text-xs leading-6 text-muted">
+            Chennai, India · Open to remote opportunities
+          </p>
           <SocialLinks />
         </div>
+        <LazyContactForm />
       </div>
-    </section>
+    </Container>
   );
 }

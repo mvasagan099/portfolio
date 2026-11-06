@@ -1,10 +1,10 @@
-"use client";
-
 import Link from "next/link";
 import type { Project } from "@/types";
 import ProjectArchitecture from "@/components/ui/ProjectArchitecture";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import { projects } from "@/data/projects";
+import Badge from "@/components/ui/Badge";
 import { isProfileUrl } from "@/lib/links";
 
 /**
@@ -12,8 +12,12 @@ import { isProfileUrl } from "@/lib/links";
  * nothing invented here.
  */
 export default function CaseStudy({ project }: { project: Project }) {
+  const nextProject =
+    projects[
+      (projects.findIndex((p) => p.slug === project.slug) + 1) % projects.length
+    ];
   return (
-    <main id="main" className="mx-auto max-w-content px-6 py-24">
+    <main id="main" tabIndex={-1} className="mx-auto max-w-content px-6 py-24">
       <Link
         href="/#projects"
         className="font-mono text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
@@ -34,6 +38,9 @@ export default function CaseStudy({ project }: { project: Project }) {
             Status: {project.status}
           </span>
         )}
+        <p className="mt-4 font-mono text-xs text-muted">
+          {project.category} · Engineering case study
+        </p>
       </header>
 
       <Section title="Overview" body={project.longDescription} />
@@ -54,11 +61,8 @@ export default function CaseStudy({ project }: { project: Project }) {
       <Section title="Technology">
         <ul className="mt-6 flex flex-wrap gap-2">
           {project.technologies.map((t) => (
-            <li
-              key={t}
-              className="rounded-full border border-border/60 bg-surfaceAlt/50 px-3 py-1.5 text-sm text-foreground"
-            >
-              {t}
+            <li key={t}>
+              <Badge>{t}</Badge>
             </li>
           ))}
         </ul>
@@ -77,7 +81,9 @@ export default function CaseStudy({ project }: { project: Project }) {
                     <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
                       Challenge
                     </h3>
-                    <p className="mt-2 text-sm text-foreground">{c.challenge}</p>
+                    <p className="mt-2 text-sm text-foreground">
+                      {c.challenge}
+                    </p>
                   </div>
                   <div>
                     <h3 className="text-xs font-semibold uppercase tracking-wider text-accent">
@@ -154,11 +160,22 @@ export default function CaseStudy({ project }: { project: Project }) {
         )}
         {!project.githubUrl && !project.liveUrl && (
           <p className="text-sm text-muted">
-            This case study describes the engineering work. Source code and live access are not publicly listed.
+            This case study describes the engineering work. Source code and live
+            access are not publicly listed.
           </p>
         )}
       </div>
-      <div className="mt-16 border-t border-border pt-8"><Button href="/#contact" variant="secondary" arrow>Talk about this project</Button></div>
+      <div className="mt-16 border-t border-border pt-8">
+        <Button href="/#contact" variant="secondary" arrow>
+          Talk about this project
+        </Button>
+        <Link
+          href={`/projects/${nextProject.slug}/`}
+          className="mt-6 block text-sm text-accent hover:underline"
+        >
+          Next case study: {nextProject.title} →
+        </Link>
+      </div>
     </main>
   );
 }
@@ -166,7 +183,7 @@ export default function CaseStudy({ project }: { project: Project }) {
 function Section({
   title,
   body,
-  children,
+  children
 }: {
   title: string;
   body?: string;

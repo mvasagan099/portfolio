@@ -25,3 +25,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+# Generated worker/server output and local contact data
+/dist/
+/.server/
+/.local/
+*.sqlite
+*.sqlite-*
