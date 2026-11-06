@@ -1,61 +1,63 @@
 "use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
-
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 type RevealProps = {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
-  /** Render as a different element (e.g. "li", "article") for valid semantic HTML. */
   as?: "div" | "li" | "article";
 };
-
-const motionElements = {
-  div: motion.div,
-  li: motion.li,
-  article: motion.article,
-};
-
-const plainElements = {
-  div: "div",
-  li: "li",
-  article: "article",
-} as const;
-
-export type { RevealProps };
-
-/**
- * Scroll-reveal wrapper. Subtle opacity + translate on enter.
- * Renders a plain element under reduced motion so reduced-motion users
- * never see content stuck at opacity 0 (useReducedMotion is null on the
- * server, so we render exactly what the user will receive after hydration).
- */
+let sharedObserver: IntersectionObserver | undefined;
+function observer() {
+  return (sharedObserver ??= new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("reveal-waiting");
+          sharedObserver?.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -24px 0px" }
+  ));
+}
 export default function Reveal({
   children,
   delay = 0,
-  y = 20,
-  className,
-  as = "div",
+  y = 12,
+  className = "",
+  as: Tag = "div"
 }: RevealProps) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    const Tag = plainElements[as];
-    return <Tag className={className}>{children}</Tag>;
-  }
-
-  const MotionTag = motionElements[as];
+  const ref = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const node = ref.current;
+    if (
+      !node ||
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      node.getBoundingClientRect().top < window.innerHeight
+    )
+      return;
+    node.classList.add("reveal-waiting");
+    const obs = observer();
+    obs.observe(node);
+    return () => obs.unobserve(node);
+  }, []);
   return (
-    <MotionTag
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
+    <Tag
+      ref={(node: HTMLElement | null) => {
+        ref.current = node;
+      }}
+      className={`reveal ${className}`}
+      style={
+        {
+          "--reveal-y": `${Math.min(y, 16)}px`,
+          "--reveal-delay": `${Math.min(delay, 0.15)}s`
+        } as CSSProperties
+      }
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }
+export type { RevealProps };

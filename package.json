@@ -2,32 +2,44 @@
   "name": "mani-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Manivasagan A. \u2014 Software Developer Portfolio",
+  "description": "Manivasagan A. — Software Developer Portfolio",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/build-server.mjs",
     "start": "node scripts/serve.mjs",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && node scripts/check-site.mjs",
     "serve": "node scripts/serve.mjs",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:web": "next build",
+    "db:generate": "drizzle-kit generate",
+    "test": "node scripts/build-server.mjs --contact-only && node --test tests/*.test.mjs",
+    "check:worker": "node scripts/check-worker.mjs"
   },
   "dependencies": {
-    "framer-motion": "^11.11.17",
+    "@hookform/resolvers": "^5.7.1",
     "lucide-react": "^0.453.0",
     "next": "^15.5.25",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "react-hook-form": "^7.85.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
+    "esbuild": "^0.25.0",
     "eslint": "^9",
     "eslint-config-next": "^15.5.25",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   }
 }

@@ -1,70 +1,81 @@
+import { Award, Milestone } from "lucide-react";
+import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Reveal from "@/components/ui/Reveal";
 import { certifications, achievements } from "@/data/site";
-
-/**
- * Certifications and achievements (Phase 17). Renders only real entries from
- * data — the component is trivial to populate by adding to data/site.ts.
- */
+import { isProfileUrl } from "@/lib/links";
 export default function Achievements() {
-  const hasCerts = certifications.length > 0;
-  const hasAchievements = achievements.length > 0;
-
-  if (!hasCerts && !hasAchievements) {
-    return (
-      <section id="achievements" className="mx-auto max-w-content px-6 py-24">
-        <SectionHeading id="achievements" kicker="Achievements" title="Certifications & achievements." />
-        <p className="mt-6 text-muted">
-          Certifications and achievements will appear here once added to{" "}
-          <code>data/site.ts</code>.
-        </p>
-      </section>
-    );
-  }
-
   return (
-    <section id="achievements" className="mx-auto max-w-content px-6 py-24">
-      <SectionHeading id="achievements" kicker="Achievements" title="Certifications & achievements." />
-
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
-        {certifications.map((cert, i) => (
-          <Reveal key={`cert-${i}`} delay={i * 0.05}>
-            <article className="flex h-full flex-col rounded-xl border border-border/60 bg-surface/40 p-6 transition-colors hover:border-accent/30">
-              <span className="font-mono text-xs uppercase tracking-wider text-accent">
-                Certification
-              </span>
-              <h3 className="mt-2 text-lg font-semibold text-foreground">{cert.title}</h3>
-              <p className="mt-1 text-sm text-muted">
-                {cert.issuer}
-                {cert.date ? ` · ${cert.date}` : ""}
-              </p>
-              {cert.url && (
-                <a
-                  href={cert.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 text-sm text-accent underline-offset-4 hover:underline"
-                >
-                  View →
-                </a>
-              )}
-            </article>
-          </Reveal>
-        ))}
-
-        {achievements.map((a, i) => (
-          <Reveal key={`ach-${i}`} delay={i * 0.05}>
-            <article className="flex h-full flex-col rounded-xl border border-border/60 bg-surface/40 p-6 transition-colors hover:border-accent/30">
-              <span className="font-mono text-xs uppercase tracking-wider text-accent">
-                Achievement
-              </span>
-              <h3 className="mt-2 text-lg font-semibold text-foreground">{a.title}</h3>
-              <p className="mt-2 text-sm text-muted">{a.description}</p>
-              {a.date && <p className="mt-2 font-mono text-xs text-muted">{a.date}</p>}
-            </article>
-          </Reveal>
-        ))}
+    <Container
+      as="section"
+      id="achievements"
+      aria-labelledby="achievements-heading"
+      className="section-space"
+    >
+      <SectionHeading
+        id="achievements"
+        kicker="Professional development"
+        title="Certifications & milestones."
+      />
+      <div className="mt-8 grid gap-5 md:grid-cols-2">
+        <div className="rounded-xl border border-border bg-surface/30 p-6">
+          <Award aria-hidden size={22} className="mb-4 text-accent" />
+          <h3 className="font-medium">Certifications</h3>
+          {certifications.length ? (
+            <ul className="mt-4 space-y-5">
+              {certifications.map((c) => (
+                <li key={`${c.title}-${c.issuer}`}>
+                  <h4 className="font-medium">{c.title}</h4>
+                  <p className="mt-1 text-sm text-muted">
+                    {c.issuer}
+                    {c.date ? ` · ${c.date}` : ""}
+                  </p>
+                  {c.url && isProfileUrl(c.url) && (
+                    <a
+                      className="mt-2 inline-block text-sm text-accent hover:underline"
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View credential →
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-3 text-sm leading-7 text-muted">
+              No certifications listed yet. My current technical work is
+              documented in the project case studies.
+            </p>
+          )}
+        </div>
+        <div className="rounded-xl border border-border bg-surface/30 p-6">
+          <Milestone aria-hidden size={22} className="mb-4 text-accent" />
+          <h3 className="font-medium">Milestones</h3>
+          {achievements.length ? (
+            <ul className="mt-4 space-y-5">
+              {achievements.map((a) => (
+                <li key={a.title}>
+                  <h4 className="font-medium">{a.title}</h4>
+                  <p className="mt-1 text-sm leading-7 text-muted">
+                    {a.description}
+                  </p>
+                  {a.date && (
+                    <p className="mt-2 font-mono text-xs text-muted">
+                      {a.date}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-3 text-sm leading-7 text-muted">
+              Additional milestones will be added as they’re documented. Explore
+              the projects for the work and lessons behind them.
+            </p>
+          )}
+        </div>
       </div>
-    </section>
+    </Container>
   );
 }

@@ -8,9 +8,25 @@ import Projects from "@/components/sections/Projects";
 import GitHub from "@/components/sections/GitHub";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
-import StackStrip from "@/components/sections/StackStrip";
-import Capabilities from "@/components/sections/Capabilities";
+import Achievements from "@/components/sections/Achievements";
 import FAQ from "@/components/sections/FAQ";
 export default function Home() {
-  return <><Background /><Navigation /><main id="main"><Hero /><StackStrip /><Capabilities /><Projects /><Skills /><Experience /><About /><GitHub /><FAQ /><Contact /></main><Footer /></>;
+  return (
+    <>
+      <Background />
+      <Navigation />
+      <main id="main" tabIndex={-1}>
+        <Hero />
+        <Projects />
+        <About />
+        <Skills />
+        <Experience />
+        <Achievements />
+        <GitHub />
+        <FAQ />
+        <Contact />
+      </main>
+      <Footer />
+    </>
+  );
 }

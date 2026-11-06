@@ -28,7 +28,7 @@ const glyphs: Record<string, string> = {
   python: "PY",
   xgboost: "XG",
   pandas: "PD",
-  sklearn: "SK",
+  sklearn: "SK"
 };
 
 /**
@@ -37,7 +37,10 @@ const glyphs: Record<string, string> = {
  */
 export function SkillIcon({ name, className }: SkillIconProps) {
   return (
-    <span className={`inline-flex items-center justify-center ${className ?? ""}`}>
+    <span
+      aria-hidden="true"
+      className={`inline-flex items-center justify-center ${className ?? ""}`}
+    >
       {glyphs[name] ?? name.charAt(0).toUpperCase()}
     </span>
   );

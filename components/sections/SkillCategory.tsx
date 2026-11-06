@@ -1,8 +1,13 @@
-"use client";
-
-import { Code2, Server, Database, Boxes, Smartphone, FlaskConical } from "lucide-react";
+import {
+  Code2,
+  Server,
+  Database,
+  Boxes,
+  Smartphone,
+  FlaskConical
+} from "lucide-react";
 import type { SkillCategory } from "@/types";
-import { Reveal } from "@/components";
+import Reveal from "@/components/ui/Reveal";
 import { SkillIcon } from "@/components/ui/SkillIcon";
 
 /**
@@ -11,16 +16,19 @@ import { SkillIcon } from "@/components/ui/SkillIcon";
  */
 export default function SkillCategory({
   category,
-  index,
+  index
 }: {
   category: SkillCategory;
   index: number;
 }) {
-  const Icon = [Code2, Server, Database, Boxes, Smartphone, FlaskConical][index % 6];
+  const Icon = [Code2, Server, Database, Boxes, Smartphone, FlaskConical][
+    index % 6
+  ];
   return (
     <Reveal delay={(index % 3) * 0.08}>
       <section className="skill-panel h-full rounded-2xl border border-border bg-surface/40 p-6">
-        <div className="mb-6"><Icon size={23} className="mb-5 text-accent/80" />
+        <div className="mb-6">
+          <Icon aria-hidden size={23} className="mb-5 text-accent/80" />
           <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
             {category.title}
           </h3>
@@ -30,10 +38,13 @@ export default function SkillCategory({
           {category.skills.map((skill) => (
             <li
               key={skill.name}
-              className="group flex items-center gap-3 rounded-lg border border-border/60 bg-surfaceAlt/40 px-3 py-2.5 transition-colors duration-200 hover:border-accent/40 hover:bg-surfaceAlt"
+              className="group flex min-w-0 items-center gap-2 rounded-lg border border-border/60 bg-surfaceAlt/40 px-3 py-2.5 transition-colors duration-200 hover:border-accent/40 hover:bg-surfaceAlt"
             >
-              <SkillIcon name={skill.icon ?? ""} className="h-4 w-4 text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-accent" />
-              <span className="text-sm text-muted group-hover:text-foreground">
+              <SkillIcon
+                name={skill.icon ?? ""}
+                className="h-7 w-7 shrink-0 rounded-md border border-border font-mono text-[9px] text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-accent"
+              />
+              <span className="min-w-0 text-xs leading-5 text-muted group-hover:text-foreground sm:text-sm">
                 {skill.name}
               </span>
             </li>

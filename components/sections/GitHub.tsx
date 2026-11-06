@@ -1,90 +1,111 @@
-import { ExternalLink } from "lucide-react";
+import { Github, ArrowUpRight, GitBranch, TerminalSquare } from "lucide-react";
+import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Reveal from "@/components/ui/Reveal";
+import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
-import { githubSection } from "@/data/site";
+import { githubSection, hero, technicalHighlights } from "@/data/site";
 import { isConfiguredGithub, isProfileUrl } from "@/lib/links";
-
-/**
- * GitHub / open-source section (Phase 18).
- * Uses local data (not fabricated stats). A real GitHub API integration
- * can replace `repos` later without changing the layout.
- */
 export default function GitHub() {
-  const configured = isConfiguredGithub(githubSection.username);
-  const hasRepos = githubSection.repos.length > 0;
-
+  const configured =
+    isConfiguredGithub(githubSection.username) &&
+    isProfileUrl(githubSection.url);
   return (
-    <section id="github" className="mx-auto max-w-content px-6 py-24">
-      <SectionHeading id="github" kicker="Source code" title="Built in the open, when I can." />
-
-      {configured && (
-        <div className="mt-8 flex items-center gap-2">
-          <ExternalLink className="h-4 w-4 text-muted" />
-          <a
-            href={githubSection.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
-          >
-            github.com/{githubSection.username}
-          </a>
-        </div>
-      )}
-
-      <div className="mt-8 grid gap-4">
-        {hasRepos ? (
-          githubSection.repos.map((repo, i) => {
-            const linked = isProfileUrl(repo.url);
-            return (
-              <Reveal key={repo.name} delay={i * 0.05}>
-                {linked ? (
+    <Container
+      as="section"
+      id="github"
+      aria-labelledby="github-heading"
+      className="section-space"
+    >
+      <SectionHeading
+        id="github"
+        kicker="Code & focus"
+        title="The code, and the thinking behind it."
+      />
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="rounded-xl border border-border bg-surface/40 p-6">
+          <div className="flex items-center gap-3">
+            <Github size={24} aria-hidden className="text-accent" />
+            <h3 className="font-mono text-sm">{githubSection.username}</h3>
+          </div>
+          <p className="mt-4 text-sm leading-7 text-muted">
+            Public repositories live on GitHub. Some product work is private;
+            the case studies explain its architecture and engineering decisions.
+          </p>
+          <ul className="mt-6 space-y-4">
+            {githubSection.repos
+              .filter((r) => isProfileUrl(r.url))
+              .map((repo) => (
+                <li key={repo.url}>
                   <a
                     href={repo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full flex-col rounded-xl border border-border/60 bg-surface/40 p-6 transition-colors hover:border-accent/40"
+                    className="group block rounded-lg border border-border p-4 transition-colors hover:border-accent/40"
                   >
-                    <RepoBody repo={repo} />
+                    <span className="flex items-center justify-between gap-3 font-mono text-sm">
+                      <span className="flex items-center gap-2">
+                        <GitBranch size={15} aria-hidden />
+                        {repo.name}
+                      </span>
+                      <ArrowUpRight
+                        size={16}
+                        className="text-accent"
+                        aria-hidden
+                      />
+                    </span>
+                    <p className="mt-3 text-sm leading-6 text-muted">
+                      {repo.description}
+                    </p>
+                    <span className="mt-3 block text-xs text-accent">
+                      {repo.language}
+                    </span>
                   </a>
-                ) : (
-                  <div className="flex h-full flex-col rounded-xl border border-border/60 bg-surface/40 p-6">
-                    <RepoBody repo={repo} />
-                  </div>
-                )}
-              </Reveal>
-            );
-          })
-        ) : (
-          <p className="col-span-full text-muted">
-            Repositories will appear here once configured in{" "}
-            <code>data/site.ts</code>.
-          </p>
-        )}
-      </div>
-
-      {configured && (
-        <div className="mt-10">
-          <Button href={githubSection.url} variant="secondary" external arrow>
-            View GitHub
-          </Button>
+                </li>
+              ))}
+          </ul>
+          {!githubSection.repos.length && (
+            <p className="mt-5 text-sm text-muted">
+              Browse the profile for available public work.
+            </p>
+          )}
+          {configured && (
+            <div className="mt-6">
+              <Button
+                href={githubSection.url}
+                external
+                variant="secondary"
+                arrow
+              >
+                Explore GitHub
+              </Button>
+            </div>
+          )}
         </div>
-      )}
-    </section>
-  );
-}
-
-function RepoBody({ repo }: { repo: { name: string; description: string; language: string } }) {
-  return (
-    <>
-      <h3 className="font-mono text-lg font-semibold text-foreground group-hover:text-accent">
-        {repo.name}
-      </h3>
-      <p className="mt-2 flex-1 text-sm text-muted">{repo.description}</p>
-      <span className="mt-4 inline-flex items-center gap-2 text-xs text-muted">
-        <span className="h-2 w-2 rounded-full bg-accent" />
-        {repo.language}
-      </span>
-    </>
+        <div className="rounded-xl border border-border bg-surface/40 p-6">
+          <TerminalSquare size={24} aria-hidden className="text-accent" />
+          <h3 className="mt-5 font-medium">Technical focus</h3>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-muted">
+            {hero.focus.map((f) => (
+              <li key={f} className="flex gap-3">
+                <span aria-hidden className="text-accent">
+                  →
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7 flex flex-wrap gap-2">
+            {technicalHighlights.map((h) => (
+              <Badge key={h}>{h}</Badge>
+            ))}
+          </div>
+          <p className="mt-7 border-t border-border pt-5 font-mono text-xs leading-6 text-muted">
+            $ status
+            <br />
+            <span className="text-accent">{hero.status}</span>
+          </p>
+        </div>
+      </div>
+    </Container>
   );
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import { Github, Linkedin, Mail } from "lucide-react";
 import { site } from "@/data/site";
 import { isProfileUrl, isConfiguredEmail } from "@/lib/links";
@@ -15,7 +13,8 @@ export default function SocialLinks({ className }: { className?: string }) {
   if (!hasGithub && !hasLinkedin && !hasMail) {
     return (
       <p className="text-sm text-muted">
-        Social links will appear here once configured in <code>data/site.ts</code>.
+        Social links will appear here once configured in{" "}
+        <code>data/site.ts</code>.
       </p>
     );
   }
@@ -28,9 +27,9 @@ export default function SocialLinks({ className }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub profile"
-          className="text-muted transition-colors hover:text-accent"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border text-muted transition-colors hover:text-accent"
         >
-          <Github className="h-5 w-5" />
+          <Github aria-hidden className="h-5 w-5" />
         </a>
       )}
       {hasLinkedin && (
@@ -39,18 +38,18 @@ export default function SocialLinks({ className }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
-          className="text-muted transition-colors hover:text-accent"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border text-muted transition-colors hover:text-accent"
         >
-          <Linkedin className="h-5 w-5" />
+          <Linkedin aria-hidden className="h-5 w-5" />
         </a>
       )}
       {hasMail && (
         <a
           href={`mailto:${site.links.email}`}
           aria-label="Email"
-          className="text-muted transition-colors hover:text-accent"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border text-muted transition-colors hover:text-accent"
         >
-          <Mail className="h-5 w-5" />
+          <Mail aria-hidden className="h-5 w-5" />
         </a>
       )}
     </div>
